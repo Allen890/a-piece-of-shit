@@ -12,7 +12,7 @@
       <div class="logout">
         <span>
           欢迎光临~
-          <a href="javascript:;">退出</a>
+          <a href="javascript:;" @click="logout">退出</a>
         </span>
       </div>
     </el-header>
@@ -30,33 +30,24 @@
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-location"></i>
-              <span>导航一</span>
+              <span>用户管理</span>
             </template>
             <el-menu-item-group>
-              <template slot="title">分组一</template>
-              <el-menu-item index="1-1">选项1</el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
+              <el-menu-item index="1-1">用户列表</el-menu-item>
             </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="1-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="1-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="1-4-1">选项1</el-menu-item>
-            </el-submenu>
           </el-submenu>
-          <el-menu-item index="2">
-            <i class="el-icon-menu"></i>
-            <span slot="title">导航二</span>
-          </el-menu-item>
-          <el-menu-item index="3" disabled>
-            <i class="el-icon-document"></i>
-            <span slot="title">导航三</span>
-          </el-menu-item>
-          <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <span slot="title">导航四</span>
-          </el-menu-item>
+          <el-submenu index="2">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>权限管理</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="2-1">角色列表</el-menu-item>
+            </el-menu-item-group>
+            <el-menu-item-group>
+              <el-menu-item index="2-2">权限列表</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
         </el-menu>
       </el-aside>
       <el-main>Main</el-main>
@@ -65,7 +56,26 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    logout () {
+      this.$confirm('亲,你确定要退出系统吗？', '温馨提示', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(() => {
+          localStorage.removeItem('token')
+          this.$message({
+            type: 'success',
+            message: '退出成功!'
+          })
+          this.$router.push('/login')
+        })
+        .catch(() => {})
+    }
+  }
+}
 </script>
 
 <style lang='scss' scoped>
@@ -75,11 +85,33 @@ export default {}
     background-color: #d8d8d8;
     display: flex;
     .img {
-      height: 40px;
+      width: 200px;
+      img {
+        height: 40px;
+        margin: 10px;
+      }
+    }
+    .system {
+      flex: 1;
+      text-align: center;
+      line-height: 60px;
+      color: #545c64;
+    }
+    .logout {
+      width: 200px;
+      font-weight: 700;
+      line-height: 60px;
+      text-align: right;
+      a {
+        color: orange;
+      }
     }
   }
   .el-aside {
     background-color: #545c64;
+  }
+  .el-main {
+    background-color: #ecf0f1;
   }
 }
 </style>

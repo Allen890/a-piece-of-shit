@@ -16,6 +16,7 @@ const router = new Router({
     {
       path: '/index',
       component: Index
+
     }
 
   ]
