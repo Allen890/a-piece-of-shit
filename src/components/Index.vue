@@ -19,10 +19,9 @@
     <el-container>
       <el-aside width="200px">
         <el-menu
+          router
           default-active="2"
           class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose"
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b"
@@ -33,7 +32,7 @@
               <span>用户管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="1-1">用户列表</el-menu-item>
+              <el-menu-item index="users">用户列表</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="2">
@@ -42,15 +41,17 @@
               <span>权限管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="2-1">角色列表</el-menu-item>
+              <el-menu-item index="rules">角色列表</el-menu-item>
             </el-menu-item-group>
             <el-menu-item-group>
-              <el-menu-item index="2-2">权限列表</el-menu-item>
+              <el-menu-item index="rights">权限列表</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
       </el-aside>
-      <el-main>Main</el-main>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
